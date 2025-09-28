@@ -30,8 +30,8 @@ let tableData = [];
 let customerCount = 0;
 let reportPage = 1;
 const REPORTS_PER_PAGE = 5;
-const CUSTOMER_LIST_KEY = 'customer-list';
-const TABLE_DATA_KEY = 'table-data';
+const CUSTOMER_LIST_KEY = 'ml1-customer-list';
+const TABLE_DATA_KEY = 'ml1-table-data';
 
 // --- Utility Functions ---
 // Show live date under heading
@@ -446,24 +446,24 @@ function saveReportToLocalStorage(dateStr, data) {
         alert('You can only save up to 31 daily reports per calendar month.');
         return;
     }
-    const key = `report-${dateStr}`;
+    const key = `ml1-report-${dateStr}`;
     localStorage.setItem(key, JSON.stringify(data));
 }
 function getReportFromLocalStorage(dateStr) {
-    return JSON.parse(localStorage.getItem(`report-${dateStr}`));
+    return JSON.parse(localStorage.getItem(`ml1-report-${dateStr}`));
 }
 function deleteReportFromLocalStorage(dateStr) {
-    localStorage.removeItem(`report-${dateStr}`);
+    localStorage.removeItem(`ml1-report-${dateStr}`);
 }
 function getAllReportDates() {
     return Object.keys(localStorage)
-        .filter(k => k.startsWith('report-'))
-        .map(k => k.replace('report-', ''))
+        .filter(k => k.startsWith('ml1-report-'))
+        .map(k => k.replace('ml1-report-', ''))
         .sort((a, b) => b.localeCompare(a));
 }
 function clearAllReports() {
     for (const k of Object.keys(localStorage)) {
-        if (k.startsWith('report-')) localStorage.removeItem(k);
+        if (k.startsWith('ml1-report-')) localStorage.removeItem(k);
     }
 }
 
